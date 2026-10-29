@@ -1,0 +1,12 @@
+# Core dependencies
+pandas==3.1.0
+python-dotenv==1.2.4
+httpx==0.28.1
+pydantic==2.14.1
+
+# LLM dependencies
+openai==3.41.0
+anthropic==2.3.0
+groq==1.7.0
+google-genai==2.34.0
+ollama==0.6.3
