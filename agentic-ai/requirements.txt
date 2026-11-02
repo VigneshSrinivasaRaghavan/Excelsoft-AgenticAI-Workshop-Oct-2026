@@ -10,3 +10,4 @@ anthropic==2.3.0
 groq==1.7.0
 google-genai==2.34.0
 ollama==0.6.3
+dashscope==2.0.3

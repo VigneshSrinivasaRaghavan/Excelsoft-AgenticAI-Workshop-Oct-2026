@@ -10,6 +10,7 @@ from google import genai
 from ollama import Client as OllamaClient
 from anthropic import Anthropic
 from groq import Groq
+from dashscope import Client as DashScope
 
 # Load .env from project root (works regardless of cwd)
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
@@ -107,6 +108,19 @@ def _call_groq(messages: List[Message]) -> str:
     return response.choices[0].message.content
 
 
+def _call_qwen(messages: List[Message]) -> str:
+    """Call Qwen API."""
+    if not QWEN_API_KEY:
+        raise ValueError("QWEN_API_KEY not set in .env")
+
+    client = DashScope(api_key=QWEN_API_KEY)
+    response = client.chat.completions.create(
+        model=MODEL, messages=messages
+    )
+
+    return response.choices[0].message.content
+
+
 def chat(messages: List[Message]) -> str:
     if not messages:
         raise ValueError("messages cannot be empty")
@@ -122,5 +136,8 @@ def chat(messages: List[Message]) -> str:
 
     if PROVIDER == "groq":
         return _call_groq(messages)
+
+    if PROVIDER == "qwen":
+        return _call_qwen(messages)
 
     raise NotImplementedError(f"Provider '{PROVIDER}' not supported yet")
