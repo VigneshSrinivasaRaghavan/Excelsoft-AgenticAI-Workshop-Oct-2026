@@ -10,8 +10,6 @@ from google import genai
 from ollama import Client as OllamaClient
 from anthropic import Anthropic
 from groq import Groq
-from dashscope import Client as DashScope
-
 # Load .env from project root (works regardless of cwd)
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
@@ -24,6 +22,10 @@ OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 QWEN_API_KEY = os.getenv("QWEN_API_KEY", "")
+# Intl (Singapore) endpoint by default; China mainland: https://dashscope.aliyuncs.com/compatible-mode/v1
+QWEN_BASE_URL = os.getenv(
+    "QWEN_BASE_URL", "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+)
 
 Message = Dict[str, str]
 
@@ -113,7 +115,8 @@ def _call_qwen(messages: List[Message]) -> str:
     if not QWEN_API_KEY:
         raise ValueError("QWEN_API_KEY not set in .env")
 
-    client = DashScope(api_key=QWEN_API_KEY)
+    # Qwen exposes an OpenAI-compatible endpoint; no dashscope SDK needed.
+    client = OpenAI(api_key=QWEN_API_KEY, base_url=QWEN_BASE_URL)
     response = client.chat.completions.create(
         model=MODEL, messages=messages
     )
