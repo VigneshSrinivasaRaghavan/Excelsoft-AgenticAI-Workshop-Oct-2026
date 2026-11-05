@@ -1,10 +1,8 @@
 import sys
 from pathlib import Path
-from typing import List, Dict
 """Test case generator agent."""
-import pandas as pd
 
-from src.core import chat, parse_json_safely, pick_requirement
+from src.core import chat, parse_json_safely, pick_requirement, save_as_csv
 
 # Project paths
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,37 +31,6 @@ Rules:
 - Keep steps clear and actionable
 - Priority: High, Medium, or Low
 - Return ONLY JSON, no markdown fences"""
-
-def save_as_csv(test_cases: List[Dict], csv_file: Path) -> None:
-    """Convert test cases to CSV using pandas."""
-
-    rows = []
-    for i, case in enumerate(test_cases, 1):
-        # Extract fields with defaults
-        test_id = case.get("id", f"TC-{i:03d}")
-        title = case.get("title", "")
-        expected = case.get("expected", "")
-        priority = case.get("priority", "Medium")
-
-        # Handle steps (list or string)
-        steps = case.get("steps", [])
-        if isinstance(steps, list):
-            steps_text = " | ".join(steps)
-        else:
-            steps_text = str(steps)
-
-        rows.append({
-            "TestID": test_id,
-            "Title": title,
-            "Steps": steps_text,
-            "Expected": expected,
-            "Priority": priority
-        })
-
-    # Create DataFrame and save
-    df = pd.DataFrame(rows)
-    df.to_csv(csv_file, index=False, encoding="utf-8")
-
 
 def main():
     """Run the test case generator agent."""

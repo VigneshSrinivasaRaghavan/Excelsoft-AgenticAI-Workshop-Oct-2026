@@ -10,6 +10,14 @@ from google import genai
 from ollama import Client as OllamaClient
 from anthropic import Anthropic
 from groq import Groq
+
+from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_qwq import ChatQwen
+from langchain_anthropic import ChatAnthropic
+from langchain_community.llms import Ollama
+from langchain_groq import ChatGroq
+
 # Load .env from project root (works regardless of cwd)
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
@@ -96,7 +104,6 @@ def _call_anthropic(messages: List[Message]) -> str:
 
     return response.content[0].text
 
-
 def _call_groq(messages: List[Message]) -> str:
     """Call Groq API."""
     if not GROQ_API_KEY:
@@ -108,7 +115,6 @@ def _call_groq(messages: List[Message]) -> str:
     )
 
     return response.choices[0].message.content
-
 
 def _call_qwen(messages: List[Message]) -> str:
     """Call Qwen API."""
@@ -122,7 +128,6 @@ def _call_qwen(messages: List[Message]) -> str:
     )
 
     return response.choices[0].message.content
-
 
 def chat(messages: List[Message]) -> str:
     if not messages:
@@ -144,3 +149,17 @@ def chat(messages: List[Message]) -> str:
         return _call_qwen(messages)
 
     raise NotImplementedError(f"Provider '{PROVIDER}' not supported yet")
+
+def get_langchain_llm():
+    if PROVIDER == "openai":
+        return ChatOpenAI(model=MODEL, api_key=OPENAI_API_KEY)
+    elif PROVIDER == "google":
+        return ChatGoogleGenerativeAI(model=MODEL, api_key=GOOGLE_API_KEY)
+    elif PROVIDER == "qwen":
+        return ChatQwen(model=MODEL, api_key=QWEN_API_KEY,api_base=QWEN_BASE_URL)
+    elif PROVIDER == "anthropic":
+        return ChatAnthropic(model=MODEL, api_key=ANTHROPIC_API_KEY)
+    elif PROVIDER == "groq":
+        return ChatGroq(model=MODEL, api_key=GROQ_API_KEY)
+    else:
+        raise NotImplementedError(f"Provider '{PROVIDER}' not supported yet")

@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import List, Dict
 
+import pandas as pd
+
 
 def pick_requirement(file_path: str = None, req_dir: str = "data/requirements") -> Path:
     """Select requirement file - either specific path or first .txt in directory."""
@@ -56,6 +58,27 @@ def parse_json_safely(text: str, raw_file: Path) -> List[Dict]:
         raise ValueError("Expected JSON array, got something else")
 
     return data
+
+
+def save_as_csv(test_cases: List[Dict], csv_file: Path) -> None:
+    """Convert test cases to CSV using pandas."""
+
+    rows = []
+    for i, case in enumerate(test_cases, 1):
+        steps = case.get("steps", [])
+        steps_text = " | ".join(steps) if isinstance(steps, list) else str(steps)
+
+        rows.append({
+            "TestID": case.get("id", f"TC-{i:03d}"),
+            "Title": case.get("title", ""),
+            "Steps": steps_text,
+            "Expected": case.get("expected", ""),
+            "Priority": case.get("priority", "Medium"),
+        })
+
+    csv_file.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(rows).to_csv(csv_file, index=False, encoding="utf-8")
+
 
 def pick_log_file(file_path: str = None, log_dir: str = "data/logs") -> Path:
     """Select log file - specific path or first .log file."""
