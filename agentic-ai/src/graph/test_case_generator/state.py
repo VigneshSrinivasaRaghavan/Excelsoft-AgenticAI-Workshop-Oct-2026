@@ -4,3 +4,7 @@ class TestCaseState(TypedDict):
     requirement: str
     test_cases: List[Dict]
     errors: List[str]
+    validation_status: str
+    retry_count: int
+    human_approval: str
+    human_feedback: str

@@ -8,7 +8,11 @@ def main():
     init_state = {
         "requirement": "",
         "test_cases": [],
-        "errors": []
+        "errors": [],
+        "validation_status": "pending",
+        "retry_count": 0,
+        "human_approval": "pending",
+        "human_feedback": ""
     }
 
     # Run Pipeline
