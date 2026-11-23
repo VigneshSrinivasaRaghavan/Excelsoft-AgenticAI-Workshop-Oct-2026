@@ -25,3 +25,8 @@ langchain-qwq==0.4.0
 
 # Langgraph Dependencies
 langgraph==1.2.22
+
+# RAG & Vector Databases
+chromadb==1.5.9
+langchain-chroma==1.1.0
+sentence-transformers==6.3.0
