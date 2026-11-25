@@ -1,0 +1,97 @@
+[
+  {
+    "key": "BUG-201",
+    "summary": "Login accepts password with trailing spaces as valid",
+    "severity": "Critical",
+    "status": "Fixed",
+    "module": "Login",
+    "related_story": "ST-101",
+    "description": "Entering the correct password followed by trailing spaces logs the user in. The password should be compared exactly.",
+    "steps_to_reproduce": [
+      "Open the login page",
+      "Enter a valid email and the correct password followed by two spaces",
+      "Click Login"
+    ],
+    "expected_behavior": "Login is rejected with 'Invalid email or password'",
+    "actual_behavior": "User is logged in and redirected to the home page"
+  },
+  {
+    "key": "BUG-202",
+    "summary": "Password reset link still works after being used once",
+    "severity": "High",
+    "status": "Fixed",
+    "module": "Login",
+    "related_story": "ST-102",
+    "description": "A reset link can be reused to change the password a second time, which violates the one-time-use rule.",
+    "steps_to_reproduce": [
+      "Request a password reset and open the emailed link",
+      "Set a new password successfully",
+      "Open the same link again and submit another password"
+    ],
+    "expected_behavior": "Second use of the link shows 'This link has expired'",
+    "actual_behavior": "Second password change succeeds"
+  },
+  {
+    "key": "BUG-203",
+    "summary": "Search shows stale results after clearing the keyword",
+    "severity": "Medium",
+    "status": "Open",
+    "module": "Search",
+    "related_story": "ST-104",
+    "description": "After searching for 'shoes' and clearing the box, the result list still shows shoes instead of the full catalog.",
+    "steps_to_reproduce": [
+      "Search for 'shoes'",
+      "Clear the search box and press Enter"
+    ],
+    "expected_behavior": "Full catalog is displayed",
+    "actual_behavior": "Previous 'shoes' results remain visible"
+  },
+  {
+    "key": "BUG-204",
+    "summary": "Cart quantity can be set to a negative number",
+    "severity": "High",
+    "status": "Fixed",
+    "module": "Cart",
+    "related_story": "ST-103",
+    "description": "Typing -3 in the quantity field reduces the cart total and can produce a negative order value.",
+    "steps_to_reproduce": [
+      "Add any product to the cart",
+      "Open the cart and type -3 in the quantity field",
+      "Press Tab"
+    ],
+    "expected_behavior": "Quantity below 1 is rejected and the previous quantity is restored",
+    "actual_behavior": "Quantity becomes -3 and the cart total goes negative"
+  },
+  {
+    "key": "BUG-205",
+    "summary": "Profile phone number accepts letters",
+    "severity": "Low",
+    "status": "Fixed",
+    "module": "Profile",
+    "related_story": "ST-106",
+    "description": "The phone number field accepts alphabetic characters and saves them.",
+    "steps_to_reproduce": [
+      "Open Profile",
+      "Enter 'abcdefghij' in the phone field",
+      "Click Save"
+    ],
+    "expected_behavior": "Inline error 'Phone number must be 10 digits'",
+    "actual_behavior": "Value is saved and a success toast is shown"
+  },
+  {
+    "key": "BUG-206",
+    "summary": "Double-click on Pay creates two charges",
+    "severity": "Critical",
+    "status": "Open",
+    "module": "Checkout",
+    "related_story": "ST-107",
+    "description": "Double-clicking the Pay button submits the payment twice and the customer is charged twice for one order.",
+    "steps_to_reproduce": [
+      "Add a product to the cart and go to checkout",
+      "Enter valid card details",
+      "Double-click the Pay button quickly"
+    ],
+    "expected_behavior": "Exactly one charge is created",
+    "actual_behavior": "Two charges and two order confirmations are created"
+  }
+]

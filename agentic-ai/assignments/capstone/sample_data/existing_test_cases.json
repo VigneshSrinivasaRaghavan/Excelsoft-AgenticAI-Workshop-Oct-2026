@@ -1,0 +1,118 @@
+[
+  {
+    "id": "TC-001",
+    "title": "ST-101 Login with valid credentials redirects to home",
+    "story_key": "ST-101",
+    "bug_key": null,
+    "priority": "High",
+    "steps": [
+      "Open the login page",
+      "Enter a registered email and the correct password",
+      "Click Login"
+    ],
+    "expected": "User lands on the home page within 3 seconds"
+  },
+  {
+    "id": "TC-002",
+    "title": "ST-101 Login with wrong password shows generic error",
+    "story_key": "ST-101",
+    "bug_key": null,
+    "priority": "High",
+    "steps": [
+      "Open the login page",
+      "Enter a registered email and a wrong password",
+      "Click Login"
+    ],
+    "expected": "Error 'Invalid email or password' is shown"
+  },
+  {
+    "id": "TC-003",
+    "title": "ST-102 Reset link is emailed for a valid account",
+    "story_key": "ST-102",
+    "bug_key": null,
+    "priority": "High",
+    "steps": [
+      "Click 'Forgot password' on the login page",
+      "Enter a registered email",
+      "Submit the form and check the inbox"
+    ],
+    "expected": "Reset email arrives within 60 seconds"
+  },
+  {
+    "id": "TC-004",
+    "title": "ST-104 Search returns matching products",
+    "story_key": "ST-104",
+    "bug_key": null,
+    "priority": "Medium",
+    "steps": [
+      "Open the catalog",
+      "Type 'shoes' in the search box",
+      "Press Enter"
+    ],
+    "expected": "Only products matching 'shoes' are listed within 2 seconds"
+  },
+  {
+    "id": "TC-005",
+    "title": "ST-104 Search with no match shows suggestions",
+    "story_key": "ST-104",
+    "bug_key": null,
+    "priority": "Medium",
+    "steps": [
+      "Open the catalog",
+      "Search for 'zzzzqqq'",
+      "Observe the result area"
+    ],
+    "expected": "'No products found' and three suggested categories are displayed"
+  },
+  {
+    "id": "TC-006",
+    "title": "ST-106 Update display name successfully",
+    "story_key": "ST-106",
+    "bug_key": null,
+    "priority": "Low",
+    "steps": [
+      "Open Profile",
+      "Change the name field and click Save",
+      "Reload the page"
+    ],
+    "expected": "Success toast is shown and the new name persists after reload"
+  },
+  {
+    "id": "TC-007",
+    "title": "REG — BUG-201 — Password with trailing spaces is rejected",
+    "story_key": "ST-101",
+    "bug_key": "BUG-201",
+    "priority": "High",
+    "steps": [
+      "Open the login page",
+      "Enter a valid email and the correct password followed by two spaces",
+      "Click Login"
+    ],
+    "expected": "Login is rejected with 'Invalid email or password'"
+  },
+  {
+    "id": "TC-008",
+    "title": "REG — BUG-204 — Negative cart quantity is rejected",
+    "story_key": "ST-103",
+    "bug_key": "BUG-204",
+    "priority": "High",
+    "steps": [
+      "Add any product to the cart",
+      "Open the cart and type -3 in the quantity field",
+      "Press Tab"
+    ],
+    "expected": "Quantity is reset to the previous value and an error is shown"
+  },
+  {
+    "id": "TC-009",
+    "title": "Home page banner loads",
+    "story_key": null,
+    "bug_key": null,
+    "priority": "Low",
+    "steps": [
+      "Open the home page",
+      "Wait for the page to finish loading"
+    ],
+    "expected": "Hero banner is visible"
+  }
+]

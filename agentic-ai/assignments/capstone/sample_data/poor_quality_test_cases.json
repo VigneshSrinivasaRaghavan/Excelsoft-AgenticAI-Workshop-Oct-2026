@@ -1,0 +1,105 @@
+[
+  {
+    "id": "PQ-001",
+    "title": "Test login",
+    "steps": ["Login"],
+    "expected": "Works",
+    "priority": "High"
+  },
+  {
+    "id": "PQ-002",
+    "title": "Verify that a registered shopper can log in with a valid email and password and land on the home page",
+    "steps": [
+      "Open the login page",
+      "Enter shopper@example.com and the correct password",
+      "Click Login"
+    ],
+    "expected": "User is redirected to the home page within 3 seconds",
+    "priority": "High"
+  },
+  {
+    "id": "PQ-003",
+    "title": "Cart test",
+    "steps": [
+      "Add item",
+      "Check cart"
+    ],
+    "expected": "Cart is correct",
+    "priority": "Medium"
+  },
+  {
+    "id": "PQ-004",
+    "title": "Verify login, add to cart, apply coupon, pay by card and view order history",
+    "steps": [
+      "Login",
+      "Add a product",
+      "Apply coupon SAVE10",
+      "Pay with card",
+      "Open order history"
+    ],
+    "expected": "Everything works",
+    "priority": "High"
+  },
+  {
+    "id": "PQ-005",
+    "title": "Coupon rejected when expired",
+    "steps": [
+      "Go to checkout with a product in the cart",
+      "Enter the expired coupon code OLD2020",
+      "Click Apply"
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "PQ-006",
+    "title": "Search products",
+    "steps": [
+      "Search for something"
+    ],
+    "expected": "Results are shown"
+  },
+  {
+    "id": "PQ-007",
+    "title": "Profile phone validation rejects short numbers",
+    "steps": [
+      "Open Profile",
+      "Enter 12345 in the phone field",
+      "Click Save"
+    ],
+    "expected": "Inline error 'Phone number must be 10 digits' is displayed and nothing is saved",
+    "priority": "Low"
+  },
+  {
+    "id": "PQ-008",
+    "title": "Login",
+    "steps": [
+      "Open the login page",
+      "Enter a valid email and a wrong password",
+      "Click Login"
+    ],
+    "expected": "Login fails",
+    "priority": "High"
+  },
+  {
+    "id": "PQ-009",
+    "title": "Check payment",
+    "steps": [
+      "Go to checkout",
+      "Pay",
+      "See result"
+    ],
+    "expected": "Payment should work properly and be fine",
+    "priority": "Critical"
+  },
+  {
+    "id": "PQ-010",
+    "title": "Verify order history shows newest order first",
+    "steps": [
+      "Log in as a user with at least three past orders",
+      "Open Order History",
+      "Read the order dates from top to bottom"
+    ],
+    "expected": "Orders are sorted by date, newest first, each row showing order id, date, total and status",
+    "priority": "Medium"
+  }
+]

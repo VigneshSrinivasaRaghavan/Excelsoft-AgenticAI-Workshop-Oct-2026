@@ -1,0 +1,65 @@
+{
+  "release": "ShopEasy v2.4.0",
+  "build": "2.4.0-rc2",
+  "test_cycle": "Regression Cycle 3",
+  "executed_on": "2026-11-24",
+  "summary": {
+    "total": 120,
+    "passed": 98,
+    "failed": 14,
+    "blocked": 5,
+    "skipped": 3
+  },
+  "modules": [
+    {"name": "Login",    "total": 20, "passed": 19, "failed": 1, "blocked": 0, "skipped": 0},
+    {"name": "Cart",     "total": 30, "passed": 24, "failed": 4, "blocked": 1, "skipped": 1},
+    {"name": "Checkout", "total": 35, "passed": 26, "failed": 6, "blocked": 2, "skipped": 1},
+    {"name": "Search",   "total": 15, "passed": 14, "failed": 1, "blocked": 0, "skipped": 0},
+    {"name": "Profile",  "total": 20, "passed": 15, "failed": 2, "blocked": 2, "skipped": 1}
+  ],
+  "notable_failures": [
+    {
+      "test_id": "TC-CHK-014",
+      "module": "Checkout",
+      "title": "Double-click on Pay creates a single charge",
+      "severity": "Critical",
+      "linked_bug": "BUG-206"
+    },
+    {
+      "test_id": "TC-CHK-021",
+      "module": "Checkout",
+      "title": "Declined card keeps cart intact",
+      "severity": "High",
+      "linked_bug": null
+    },
+    {
+      "test_id": "TC-CHK-007",
+      "module": "Checkout",
+      "title": "Coupon cannot reduce total below zero",
+      "severity": "Medium",
+      "linked_bug": null
+    },
+    {
+      "test_id": "TC-CRT-009",
+      "module": "Cart",
+      "title": "Cart persists after logout and login",
+      "severity": "High",
+      "linked_bug": null
+    },
+    {
+      "test_id": "TC-SRC-003",
+      "module": "Search",
+      "title": "Clearing keyword shows the full catalog",
+      "severity": "Medium",
+      "linked_bug": "BUG-203"
+    },
+    {
+      "test_id": "TC-PRF-006",
+      "module": "Profile",
+      "title": "Address change visible on next page load",
+      "severity": "Low",
+      "linked_bug": null
+    }
+  ],
+  "blocked_reason": "5 tests are blocked by BUG-206 in the checkout payment flow"
+}
